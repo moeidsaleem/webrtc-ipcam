@@ -7,10 +7,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="author" type="text/html" href="https://plus.google.com/+MuazKhan">
-    <meta name="author" content="Muaz Khan">
+    <link rel="author" type="text/html" href="http://atrixdigital.com">
+    <meta name="author" content="Atrix Digital">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.webrtc-experiment.com/style.css">
+
     <style>
     audio,
     video {
@@ -40,10 +42,7 @@
         position: absolute;
     }
     
-    p {
-        padding: 1em;
-    }
-    
+   
     li {
         border-bottom: 1px solid rgb(189, 189, 189);
         border-left: 1px solid rgb(189, 189, 189);
@@ -51,7 +50,6 @@
     }
     
     .video-container {
-        background: white;
         border: 2px solid black;
         border-radius: 0.2em;
         display: inline-block;
@@ -88,51 +86,89 @@
     </script>
 </head>
 
-<body>
-    <article>
-        <header style="text-align: center;">
+<body style="margin:0;">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">VIdeo Motion©</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li ><a href="about.html">About us</a></li>
+            </ul>
+            
+         
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+<div class="row text-center">  
+      <header style="text-align: center;">
             <h1>
-                <a href="" target="_blank">Video Node</a> &
-                <a href="" target="_blank">Atrix Digital</a> ® <a href="" target="_blank">Shahbaz & Zargam</a>
-            </h1>
-           
+                <h3><a href="" target="_blank">IPRTC </a> 
+                <img class="img-thumbnail img-responsive" width="50px" src="https://lh5.ggpht.com/iqbJRaUObeLFdAZAlhy4TGO9aCgZRMthTsuH6YUfDY0CHvspk7AdSUogp7TYAWxEWuKf=w170">
+</h3>
+            </h1>    
         </header>
-
-        <div class="github-stargazers"></div>
-
         <!-- just copy this <section> and next script -->
-        <section class="experiment">
             <section>
             <span> Camera </span>
-             <!--    <span>
-                    Private ??
-                    <a href="" target="_blank" title="Open this link in new tab. Then your room will be private!">
-                        <code>
-                            <strong id="unique-token">#123456789</strong>
-                        </code>
-                    </a>
-                </span> -->
 
-                <input type="text" id="conference-name">
-                <button id="setup-new-conference" class="setup">Setup New Camera</button>
-                <button id="leave-conference" class="setup" style="margin-left: 13em;" disabled>Leave</button>
+                <input class="form-inline" type="text" id="conference-name">
+                <button id="setup-new-conference" class="setup">Go live!</button>
+                <button class="btn btn-warning" id="leave-conference" class="setup" style="margin-left: 13em;" disabled>Stop</button>
             </section>
-
+<br>
             <!-- list of all available broadcasting rooms -->
             <table style="width: 100%;" id="rooms-list"></table>
 
             <!-- local/remote videos container -->
             <div id="videos-container"></div>
-        </section>
+        </div>
+
+
+<div class="panel panel-default" style=";bottom: 0;width: 100%">
+    <div class="panel-body">
+        Video Motion©
+    </div>
+    <div class="panel-footer">
+            <b>contact us: </b> +92333 - 1950718 <br>
+            <b> Address; </b> House no.223,St#52, G9/4, Islamabad <br>
+    </div>
+
+   <div class="text-center"> Copyrights 2017. <a href="http://atrixdigital.com/">Atrix Digital Solutions</a>
+</div>
+</div>
+       
+
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBjOdTZr7s5Ccq808Qfgf4PukrIMgTJfXI",
+    authDomain: "academy-1227.firebaseapp.com",
+    databaseURL: "https://academy-1227.firebaseio.com",
+    projectId: "academy-1227",
+    storageBucket: "academy-1227.appspot.com",
+    messagingSenderId: "976444853523"
+  };
+  firebase.initializeApp(config);
+</script>
 
         <script>
-        // Muaz Khan          - https://github.com/muaz-khan
-        // MIT License        - https://www.webrtc-experiment.com/licence/
-        // RecordRTC          - https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC
-        // RTCMultiConnection - http://www.RTCMultiConnection.org/docs/
+   
         var connection = new RTCMultiConnection();
-        connection.session = {
-            audio: true,
+            connection.session = {
+            audio: false,
             video: true
         };
         connection.onstream = function(e) {
@@ -146,6 +182,7 @@
             scaleVideos();
             document.getElementById('leave-conference').disabled = false;
         }
+        
         function getVideo(video, streamid) {
             var div = document.createElement('div');
             div.className = 'video-container';
@@ -159,43 +196,28 @@
                 if (this.innerHTML == 'Start Recording') {
                     this.innerHTML = 'Stop Recording';
                     connection.streams[this.id].startRecording({
-                        audio: false,
+                        audio: true,
                         video: true
                     });
-
-
-            setTimeout(function() {
-                var stream = connection.streams[this.id];
-                    stream.stopRecording(function(blob) {
-                        var h2;
-                        if (blob.audio && !(connection.UA.Chrome && stream.type == 'remote')) {
-                            h2 = document.createElement('h2');
-                            h2.innerHTML = '<a href="' + URL.createObjectURL(blob.audio) + '" target="_blank">Open recorded ' + blob.audio.type + '</a>';
-                            div.appendChild(h2);
-                        }
-                        if (blob.video) {
-                            h2 = document.createElement('h2');
-                            h2.innerHTML = '<a href="' + URL.createObjectURL(blob.video) + '" target="_blank">Open recorded ' + blob.video.type + '</a>';
-                            div.appendChild(h2);
-                        }
-                    });
-            }, 5000);
+                   var stream = connection.streams[this.id];
+                   if(stream.type=='remote'){
+                       console.log('remote');
+                   }
+          
 
                 } else {
                     this.innerHTML = 'Start Recording';
                     var stream = connection.streams[this.id];
+
                     stream.stopRecording(function(blob) {
                         var h2;
+
                         if (blob.audio && !(connection.UA.Chrome && stream.type == 'remote')) {
                             h2 = document.createElement('h2');
                             h2.innerHTML = '<a href="' + URL.createObjectURL(blob.audio) + '" target="_blank">Open recorded ' + blob.audio.type + '</a>';
-                            recList.appendChild(h2);
-                        }
-                        if (blob.video) {
-                            h2 = document.createElement('h2');
-                            h2.innerHTML = '<a href="' + URL.createObjectURL(blob.video) + '" target="_blank">Open recorded ' + blob.video.type + '</a>';
                             div.appendChild(h2);
                         }
+                        
                     });
                 }
                 setTimeout(function() {
